@@ -1,0 +1,24 @@
+{
+  "name": "myq-aws",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cju8676/garagedoor-ts-app.git"
+  },
+  "author": "corey urbanke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cju8676/garagedoor-ts-app/issues"
+  },
+  "homepage": "https://github.com/cju8676/garagedoor-ts-app#readme",
+  "dependencies": {
+    "@hjdhjd/myq": "^6.0.7",
+    "serverless": "^3.10.2",
+    "typescript": "^4.6.3"
+  }
+}

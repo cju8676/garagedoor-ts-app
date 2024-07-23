@@ -1,0 +1,17 @@
+org: cju8676
+app: garagedoor-ts
+service: garagedoor-ts
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+functions:
+  garageFunction:
+    handler: index.handler
+    name: garage-door-ts
+    events:
+      - http:
+        method: POST
+        path: garage
+        cors: true
