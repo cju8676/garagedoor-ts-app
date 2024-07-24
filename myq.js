@@ -40,7 +40,12 @@ class Garage {
                 const res = yield this.refresh();
                 console.log("Refresh Complete: ", res, "garage: ", this.garage.api);
                 console.log("Opening Garage Door...");
-                return yield this.garage.api.execute(this.garage.api.devices[0], "open");
+                if (this.garage.api.devices && this.garage.api.devices.length > 0) {
+                    console.log("Device Found: ", this.garage.api.devices[0]);
+                    return yield this.garage.api.execute(this.garage.api.devices[0], "open");
+                }
+                console.log("No Device Found");
+                return yield Promise.reject();
             }
             catch (err) {
                 console.log("Error Occured: ", err);
@@ -60,8 +65,6 @@ class Garage {
                 console.log("Error Occured: ", err);
                 return yield Promise.reject();
             }
-            //console.log(this.garage.api.devices[0])
-            //return Promise.reject();
         });
     }
 }

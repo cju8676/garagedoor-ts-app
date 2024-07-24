@@ -1,0 +1,7 @@
+{
+    "body": {
+        "email": "email@hotmail.com",
+        "pass": "password",
+        "cmd": "open"
+    }
+}

@@ -1,10 +1,9 @@
-import { myQApi, myQDevice } from "@hjdhjd/myq";
-
+import { myQApi } from "@hjdhjd/myq";
 
 export class MyQGarage {
     public readonly api: myQApi;
     constructor(email: string, pass: string) {
-        this.api = new myQApi(email, pass)
+        this.api = new myQApi(email, pass);
     }
 }
 
@@ -22,15 +21,20 @@ export class Garage {
 
     async status(): Promise<any> {
         await this.refresh();
-        return this.garage.api.devices[0]
+        return this.garage.api.devices[0];
     }
 
     async open(): Promise<boolean> {
         try {
             const res = await this.refresh();
             console.log("Refresh Complete: ", res, "garage: ", this.garage.api);
-            console.log("Opening Garage Door...");
-            return await this.garage.api.execute(this.garage.api.devices[0], "open");
+            if (this.garage.api.devices && this.garage.api.devices.length > 0) {
+                console.log("Device Found: ", this.garage.api.devices[0]);
+                console.log("Opening Garage Door...");
+                return await this.garage.api.execute(this.garage.api.devices[0], "open");
+            }
+            console.log("No Device Found");
+            return await Promise.reject();
         } catch (err) {
             console.log("Error Occured: ", err);
             return await Promise.reject();
@@ -41,13 +45,16 @@ export class Garage {
         try {
             const res = await this.refresh();
             console.log("Refresh Complete: ", res, "garage:", this.garage.api);
-            console.log("Closing Garage Door...");
-            return await this.garage.api.execute(this.garage.api.devices[0], "close");
+            if (this.garage.api.devices && this.garage.api.devices.length > 0) {
+                console.log("Device Found: ", this.garage.api.devices[0]);
+                console.log("Closing Garage Door...");
+                return await this.garage.api.execute(this.garage.api.devices[0], "close");
+            }
+            console.log("No Device Found");
+            return await Promise.reject();
         } catch (err) {
             console.log("Error Occured: ", err);
             return await Promise.reject();
         }
-        //console.log(this.garage.api.devices[0])
-        //return Promise.reject();
     }
 }
